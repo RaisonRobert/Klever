@@ -35,7 +35,6 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
         adapterCadastro = RecyclerViewListaAdapter(this)
-
         enviarCadastro.setOnClickListener {
             cadastro(view)
             abrirOk(view)
@@ -64,10 +63,10 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     }
 
     private fun abrirOk(view: View) {
-        val alertDialogPerguntas = AlertDialog.Builder(requireContext())
+        val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_cadastro, null)
-        alertDialogPerguntas.setView(view).show()
+        alertDialogExibir.setView(view).show()
     }
 
     override fun itemClick(dado: DadosBanco, btnVisualizar: Button, btnExcluir: Button, position: Int) {

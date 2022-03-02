@@ -23,7 +23,6 @@ class FragmentPesquisa: Fragment(), RecyclerViewListaAdapter.itemClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,22 +31,18 @@ class FragmentPesquisa: Fragment(), RecyclerViewListaAdapter.itemClickListener{
         val view = inflater.inflate(R.layout.layout_fragment_menu, container, false)
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialogPesquisa(view)
     }
-
-
     private fun dialogPesquisa(view: View){
-        var i:Boolean = false
+        val alertDialogExibir = AlertDialog.Builder(requireContext())
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
+        var i = false
         loading.show()
         Salvar.arquivosDados.forEach{
             if(Salvar.pesquisa == it.CPF){
-                val alertDialogPerguntas = AlertDialog.Builder(requireContext())
-                val inflater = layoutInflater
-                val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
-                alertDialogPerguntas.setView(view).show()
                 Toast.makeText(requireContext(),"Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
                 i = true
                 view.visualizacao_nome.text = it.NOME
@@ -57,10 +52,12 @@ class FragmentPesquisa: Fragment(), RecyclerViewListaAdapter.itemClickListener{
                 view.visualizacao_telefone.text = it.TELEFONE
             }
         }
+        loading.dismiss()
         if(i == false){
             Toast.makeText(requireContext(),"Pesquisa Não Encontrada", Toast.LENGTH_SHORT).show()
+        }else{
+            alertDialogExibir.setView(view).show()
         }
-            loading.dismiss()
             findNavController().popBackStack(R.id.menuInicial, false)
     }
 

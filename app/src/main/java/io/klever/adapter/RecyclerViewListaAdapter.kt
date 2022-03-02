@@ -14,7 +14,6 @@ class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
     RecyclerView.Adapter<RecyclerViewListaAdapter.ViewHolder>() {
     private var listar: MutableList<DadosBanco> = mutableListOf()
     var itemListener: itemClickListener? = null
-
     interface itemClickListener {
         fun itemClick(dado: DadosBanco, btnVisualizar : Button, btnExcluir: Button, position: Int)
 
@@ -25,15 +24,12 @@ class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
             itemView.textViewNome.text = listAdapter.NOME.toString()
             itemView.textViewCpf.text = listAdapter.CPF.toString()
             itemView.textViewData.text = listAdapter.DATA.toString()
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_fragment_list, parent, false)
-
         return ViewHolder(view)
     }
 

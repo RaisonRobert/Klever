@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
-import kotlinx.android.synthetic.main.layout_fragment_menu.*
 
 class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     lateinit var loading: androidx.appcompat.app.AlertDialog
@@ -67,7 +65,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
 //                        viewTest.editTextTextPersonName.text = dado.NOME
                     }
                     btnExcluir.setOnClickListener {
-                        abrirExcluir(view, dado)
+                        abrirExcluir(view, dado, position)
                         Log.i("lista", "botao Excluir >> posição: $position")
                         Log.i("lista", "botao Excluir >> posição: $dado")
                         Log.i("lista", "botao Excluir >> posição: ${Salvar.arquivosDados}")
@@ -87,17 +85,21 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
 
     }
     private fun exibir(view: View, dado: DadosBanco) {
-        val alertDialogPerguntas = AlertDialog.Builder(requireContext())
+        val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
-        alertDialogPerguntas.setView(view).show()
+        alertDialogExibir.setView(view).show()
         view.visualizacao_nome.text = dado.NOME
         view.visualizacao_cpf.text = dado.CPF
         view.visualizacao_data.text = dado.DATA
         view.visualizacao_email.text = dado.EMAIL
         view.visualizacao_telefone.text = dado.TELEFONE
+        view.btnAlterar.setOnClickListener{
+            Salvar.pesquisa = dado.CPF
+            findNavController().navigate(R.id.fragmentAlterar)
+        }
     }
-    private fun abrirExcluir(view: View, dado: DadosBanco) {
+    private fun abrirExcluir(view: View, dado: DadosBanco, position: Int) {
         Salvar.arquivosDados.remove(dado)
         val alertDialogPerguntas = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater

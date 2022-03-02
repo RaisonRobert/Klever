@@ -59,8 +59,8 @@
         android:label="Dialog Visualização"
         tools:layout="@layout/dialog_exibir_dados" >
         <action
-            android:id="@+id/action_dialog_visualização_to_fragmentCadastro"
-            app:destination="@id/fragmentCadastro" />
+            android:id="@+id/action_dialog_visualização_to_fragmentAlterar"
+            app:destination="@id/fragmentAlterar" />
     </fragment>
     <fragment
         android:id="@+id/dialog_excluir"
@@ -72,5 +72,14 @@
             app:destination="@id/menuInicial"
             app:popUpTo="@id/menuInicial"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAlterar"
+        tools:layout="@layout/layout_fragment_alterar"
+        android:name="io.klever.fragment.FragmentAlterar"
+        android:label="FragmentAlterar" >
+        <action
+            android:id="@+id/action_fragmentAlterar_to_menuInicial"
+            app:destination="@id/menuInicial" />
     </fragment>
 </navigation>
