@@ -57,7 +57,11 @@
         android:id="@+id/dialog_visualização"
         android:name="io.klever.fragment.FragmentPesquisa"
         android:label="Dialog Visualização"
-        tools:layout="@layout/dialog_exibir_dados" />
+        tools:layout="@layout/dialog_exibir_dados" >
+        <action
+            android:id="@+id/action_dialog_visualização_to_fragmentCadastro"
+            app:destination="@id/fragmentCadastro" />
+    </fragment>
     <fragment
         android:id="@+id/dialog_excluir"
         android:label="Dialog Visualização"

@@ -36,9 +36,9 @@ class FragmentMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
-//        Salvar.arquivosDados.add(Salvar.dados1)
-//        Salvar.arquivosDados.add(Salvar.dados2)
-//        Salvar.arquivosDados.add(Salvar.dados3)
+        Salvar.arquivosDados.add(Salvar.dados1)
+        Salvar.arquivosDados.add(Salvar.dados2)
+        Salvar.arquivosDados.add(Salvar.dados3)
 //        view.findViewById<EditText>(R.id.editTextPesquisar).setText("Raison")
 //        Alterar
         cadastrar.setOnClickListener {
@@ -56,12 +56,22 @@ class FragmentMenu : Fragment() {
                 findNavController().navigate(R.id.action_menuInicial_to_fragmentLista)
                 Log.i("botao", "clicar")
 
+
             }
         }
         pesquisar.setOnClickListener {
-            findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+            Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
+            if(Salvar.pesquisa == ""){
+                Toast.makeText(
+                    requireContext(),
+                    "Campo Vazio",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+           // dialogPesquisa(view)
             Log.i("botao", "Pesquisa")
         }
     }
+
 
 }
