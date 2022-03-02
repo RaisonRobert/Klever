@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuInicial">
+
+    <fragment
+        android:id="@+id/menuInicial"
+        android:name="io.klever.fragment.FragmentMenu"
+        android:label="Menu de Inicio"
+        tools:layout="@layout/layout_fragment_menu">
+        <action
+            android:id="@+id/action_menuInicial_to_fragmentCadastro"
+            app:destination="@id/fragmentCadastro"
+            app:launchSingleTop="false" />
+        <action
+            android:id="@+id/action_menuInicial_to_fragmentLista"
+            app:destination="@id/fragmentLista"
+            app:launchSingleTop="false" />
+        <action
+            android:id="@+id/action_menuInicial_to_dialog_visualização"
+            app:destination="@id/dialog_visualização" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCadastro"
+        android:name="io.klever.fragment.FragmentCadastro"
+        android:label="Fragment de Cadastro"
+        tools:layout="@layout/layout_fragment_cadastro">
+        <action
+            android:id="@+id/action_fragmentCadastro_to_dialog_cadastro"
+            app:destination="@id/dialog_cadastro" />
+    </fragment>
+    <fragment
+        android:id="@+id/dialog_cadastro"
+        android:label="Dialog Cadastro"
+        tools:layout="@layout/dialog_cadastro">
+        <action
+            android:id="@+id/action_dialog_cadastro_to_menuInicial"
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLista"
+        android:name="io.klever.fragment.FragmentLista"
+        android:label="Fragment de Lista"
+        tools:layout="@layout/layout_fragment_lista">
+        <action
+            android:id="@+id/action_fragmentLista_to_dialog_visualização"
+            app:destination="@id/dialog_visualização" />
+        <action
+            android:id="@+id/action_fragmentLista_to_dialog_excluir"
+            app:destination="@id/dialog_excluir" />
+    </fragment>
+    <fragment
+        android:id="@+id/dialog_visualização"
+        android:name="io.klever.fragment.FragmentPesquisa"
+        android:label="Dialog Visualização"
+        tools:layout="@layout/dialog_exibir_dados" />
+    <fragment
+        android:id="@+id/dialog_excluir"
+        android:label="Dialog Visualização"
+        tools:layout="@layout/dialog_excluir">
+
+        <action
+            android:id="@+id/action_dialog_excluir_to_menuInicial"
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>
