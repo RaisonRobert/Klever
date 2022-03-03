@@ -87,13 +87,16 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
-        alertDialogExibir.setView(view).show()
+        alertDialogExibir.setView(view)
+        val dialog = alertDialogExibir.create()
+        dialog.show()
         view.visualizacao_nome.text = dado.NOME
         view.visualizacao_cpf.text = dado.CPF
         view.visualizacao_data.text = dado.DATA
         view.visualizacao_email.text = dado.EMAIL
         view.visualizacao_telefone.text = dado.TELEFONE
         view.btnAlterar.setOnClickListener{
+            dialog.dismiss()
             Salvar.pesquisa = dado.CPF
             findNavController().navigate(R.id.fragmentAlterar)
         }
