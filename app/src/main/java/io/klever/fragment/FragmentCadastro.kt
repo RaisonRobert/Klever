@@ -20,10 +20,6 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     lateinit var adapterCadastro: RecyclerViewListaAdapter
     private lateinit var loading: AlertDialog
     private val titulo = "Cadastro"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

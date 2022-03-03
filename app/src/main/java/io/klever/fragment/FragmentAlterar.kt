@@ -34,7 +34,6 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
             val navController = findNavController()
             navController.popBackStack(R.id.menuInicial, false)
-
         }
 
     }

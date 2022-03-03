@@ -24,11 +24,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     private val titulo = "Lista de Todos Cadastrado"
     lateinit var recycler_lista: RecyclerView
     lateinit var adapterLista: RecyclerViewListaAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
+  override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -43,7 +39,6 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         adapterLista = RecyclerViewListaAdapter(this)
         setupRecyclerView(view)
         addDados(view)
-
     }
 
     private fun addDados(view: View) {
@@ -64,7 +59,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                         exibir(view, dado)
                     }
                     btnExcluir.setOnClickListener {
-                        abrirExcluir(view, dado, position)
+                        abrirExcluir(dado)
                         Log.i("lista", "botao Excluir >> posição: $position")
                         Log.i("lista", "botao Excluir >> posição: $dado")
                         Log.i("lista", "botao Excluir >> posição: ${Salvar.arquivosDados}")
