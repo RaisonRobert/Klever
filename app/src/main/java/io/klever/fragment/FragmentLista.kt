@@ -101,7 +101,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             findNavController().navigate(R.id.fragmentAlterar)
         }
     }
-    private fun abrirExcluir(view: View, dado: DadosBanco, position: Int) {
+    private fun abrirExcluir(dado: DadosBanco) {
         Salvar.arquivosDados.remove(dado)
         val alertDialogPerguntas = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
