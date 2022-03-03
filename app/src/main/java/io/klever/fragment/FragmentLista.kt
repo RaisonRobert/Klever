@@ -63,7 +63,6 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                     btnExcluir.setOnClickListener {
                         abrirExcluir(dado)
                         if (Salvar.arquivosDados.isNotEmpty()) {
-//                            findNavController().navigate(R.id.action_fragmentLista_self)
                             findNavController().popBackStack()
                             findNavController().navigate(R.id.fragmentLista)
                         }
@@ -95,7 +94,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         view.btnAlterar.setOnClickListener{
             dialog.dismiss()
             Salvar.pesquisa = dado.CPF
-            findNavController().navigate(R.id.fragmentAlterar)
+            findNavController().navigate(R.id.action_fragmentLista_to_fragmentAlterar)
         }
     }
     private fun abrirExcluir(dado: DadosBanco) {

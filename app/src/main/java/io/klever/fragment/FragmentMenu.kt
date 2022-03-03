@@ -1,5 +1,6 @@
 package io.klever.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,6 +29,7 @@ class FragmentMenu : Fragment() {
         return view
     }
 
+    @SuppressLint("CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
@@ -48,10 +50,10 @@ class FragmentMenu : Fragment() {
             }
         }
         pesquisar.setOnClickListener {
-            var pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
+            val pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
             Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
             Log.i("botao", "Pesquisa: $pesquisa")
-            if(true == pesquisa){
+            if(pesquisa){
                 Toast.makeText(
                     requireContext(),
                     "Campo Vazio",
@@ -61,7 +63,6 @@ class FragmentMenu : Fragment() {
                 Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
                 findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
             }
-//            view.findViewById<EditText>(R.id.editTextAlterarNome).setText("")
         }
     }
 

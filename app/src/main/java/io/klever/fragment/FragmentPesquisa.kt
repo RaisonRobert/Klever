@@ -15,6 +15,7 @@ import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
+import kotlinx.android.synthetic.main.dialog_exibir_pesquisa.view.*
 
 class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     lateinit var loading: androidx.appcompat.app.AlertDialog
@@ -23,8 +24,7 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         savedInstanceState: Bundle?,
     ): View? {
         loading = Load.createLoadDialog(this.requireContext(), false)
-        val view = inflater.inflate(R.layout.layout_fragment_menu, container, false)
-        return view
+        return inflater.inflate(R.layout.layout_fragment_menu, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     private fun dialogPesquisa() {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
-        val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
+        val view = inflater.inflate(R.layout.dialog_exibir_pesquisa, null)
         alertDialogExibir.setView(view)
         val dialog = alertDialogExibir.create()
         var i = false
@@ -44,11 +44,11 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
             if (Salvar.pesquisa == it.CPF) {
                 Toast.makeText(requireContext(), "Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
                 i = true
-                view.visualizacao_nome.text = it.NOME
-                view.visualizacao_cpf.text = it.CPF
-                view.visualizacao_data.text = it.DATA
-                view.visualizacao_email.text = it.EMAIL
-                view.visualizacao_telefone.text = it.TELEFONE
+                view.visualizacao_nome_pesquisa.text = it.NOME
+                view.visualizacao_cpf_pesquisa.text = it.CPF
+                view.visualizacao_data_pesquisa.text = it.DATA
+                view.visualizacao_email_pesquisa.text = it.EMAIL
+                view.visualizacao_telefone_pesquisa.text = it.TELEFONE
             }
         }
         loading.dismiss()
@@ -57,12 +57,9 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
             val navController = findNavController()
             navController.popBackStack(R.id.menuInicial, false)
         } else {
+            //limpa a tela da pesquisa
             findNavController().navigate(R.id.action_dialog_visualização_to_menuInicial)
             dialog.show()
-            view.btnAlterar.setOnClickListener {
-                dialog.dismiss()
-                findNavController().navigate(R.id.action_menuInicial_to_fragmentAlterar)
-            }
         }
     }
 

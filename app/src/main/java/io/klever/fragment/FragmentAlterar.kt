@@ -1,5 +1,6 @@
 package io.klever.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,20 +23,19 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.layout_fragment_alterar, container, false)
-        return view
+        return inflater.inflate(R.layout.layout_fragment_alterar, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addAlterar(view)
+        //alterar ok
         btnSalvarAlteracao.setOnClickListener {
             abrirOk(view)
             findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
             val navController = findNavController()
             navController.popBackStack(R.id.menuInicial, false)
         }
-
     }
 
     fun addAlterar(view: View) {
@@ -50,22 +50,24 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         }
     }
 
+    @Suppress("NAME_SHADOWING")
+    @SuppressLint("SetTextI18n")
     private fun abrirOk(view: View) {
-        var i = false
+//        var i = false
         Salvar.arquivosDados.forEach {
-            i = false
+//            i = false
             if (Salvar.pesquisa == it.CPF) {
-                i = true
+//                i = true
                 Log.i("pesquisa", "antes : ${it.NOME}")
                 it.NOME = view.findViewById<EditText>(R.id.editTextAlterarNome).text.toString()
                 it.EMAIL = view.findViewById<EditText>(R.id.editTextAlterarEmail).text.toString()
                 it.CPF = view.findViewById<EditText>(R.id.editTextAlterarCpf).text.toString()
                 it.TELEFONE = view.findViewById<EditText>(R.id.editTextAlterarPhone).text.toString()
                 it.DATA = view.findViewById<EditText>(R.id.editTextAlterarDate).text.toString()
-                Log.i("pesquisa", "valor de i: ${i}")
+//                Log.i("pesquisa", "valor de i: ${i}")
             }
         }
-        Log.i("pesquisa", "valor de i: ${i}")
+//        Log.i("pesquisa", "valor de i: ${i}")
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_cadastro, null)

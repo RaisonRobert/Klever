@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.layout_fragment_cadastro.*
 
 class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     lateinit var adapterCadastro: RecyclerViewListaAdapter
-    private lateinit var loading: AlertDialog
     private val titulo = "Cadastro"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +34,17 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
             cadastro(view)
             abrirOk()
             findNavController().navigate(R.id.action_fragmentCadastro_to_menuInicial)
+            val navController = findNavController()
+            navController.popBackStack(R.id.menuInicial, false)
         }
     }
 
     private fun cadastro(view: View) {
-        var nome: String = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
-        var email: String = view.findViewById<EditText>(R.id.editTextTextEmail).text.toString()
-        var cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
-        var telefone: String = view.findViewById<EditText>(R.id.editTextPhone).text.toString()
-        var data: String = view.findViewById<EditText>(R.id.editTextDate).text.toString()
+        val nome: String = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
+        val email: String = view.findViewById<EditText>(R.id.editTextTextEmail).text.toString()
+        val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
+        val telefone: String = view.findViewById<EditText>(R.id.editTextPhone).text.toString()
+        val data: String = view.findViewById<EditText>(R.id.editTextDate).text.toString()
         val dadoCadastro = (
                 DadosBanco(
                     NOME = nome,
@@ -53,7 +54,7 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
                     DATA = data
                 )
                 )
-        Log.i("dados", "${dadoCadastro}")
+        Log.i("dados", "$dadoCadastro")
         Salvar.arquivosDados.add(dadoCadastro)
     }
 
