@@ -30,8 +30,6 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialogPesquisa()
-//        val navController = findNavController()
-//        navController.popBackStack(R.id.menuInicial, false)
     }
 
     private fun dialogPesquisa() {
@@ -51,24 +49,21 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
                 view.visualizacao_data.text = it.DATA
                 view.visualizacao_email.text = it.EMAIL
                 view.visualizacao_telefone.text = it.TELEFONE
-
             }
         }
         loading.dismiss()
-        if (i == false) {
+        if (!i) {
             Toast.makeText(requireContext(), "Pesquisa Não Encontrada", Toast.LENGTH_SHORT).show()
             val navController = findNavController()
             navController.popBackStack(R.id.menuInicial, false)
         } else {
+            findNavController().navigate(R.id.action_dialog_visualização_to_menuInicial)
             dialog.show()
             view.btnAlterar.setOnClickListener {
                 dialog.dismiss()
-                findNavController().navigate(R.id.fragmentAlterar)
+                findNavController().navigate(R.id.action_menuInicial_to_fragmentAlterar)
             }
         }
-       // findNavController().navigate(R.id.action_dialog_visualização_to_menuInicial)
-//        val navController = findNavController()
-//        navController.popBackStack(R.id.menuInicial, false)
     }
 
     override fun itemClick(

@@ -17,13 +17,8 @@ import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
 import kotlinx.android.synthetic.main.layout_fragment_menu.*
 
 class FragmentMenu : Fragment() {
-
-    private lateinit var loading: AlertDialog
+   private lateinit var loading: AlertDialog
     private val titulo = "Menu"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +31,6 @@ class FragmentMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
-//        Salvar.arquivosDados.add(Salvar.dados1)
-//        Salvar.arquivosDados.add(Salvar.dados2)
-//        Salvar.arquivosDados.add(Salvar.dados3)
-//        view.findViewById<EditText>(R.id.editTextPesquisar).setText("Raison")
-//        Alterar
         cadastrar.setOnClickListener {
             findNavController().navigate(R.id.action_menuInicial_to_fragmentCadastro)
             Log.i("botao", "cadastro")
@@ -60,7 +50,6 @@ class FragmentMenu : Fragment() {
         pesquisar.setOnClickListener {
             var pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
             Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
-
             Log.i("botao", "Pesquisa: $pesquisa")
             if(true == pesquisa){
                 Toast.makeText(
@@ -71,12 +60,8 @@ class FragmentMenu : Fragment() {
             }else {
                 Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
                 findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
-//                val navController = findNavController()
-//                navController.popBackStack(R.id.menuInicial, false)
             }
-
-
-          //  findNavController().navigate(R.id.menuInicial)
+//            view.findViewById<EditText>(R.id.editTextAlterarNome).setText("")
         }
     }
 

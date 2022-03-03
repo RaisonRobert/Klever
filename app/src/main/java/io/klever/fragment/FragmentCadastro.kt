@@ -38,8 +38,9 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         enviarCadastro.setOnClickListener {
             cadastro(view)
             abrirOk(view)
-            val navController = findNavController()
-            navController.popBackStack(R.id.menuInicial, false)
+            findNavController().navigate(R.id.action_fragmentCadastro_to_menuInicial)
+//            val navController = findNavController()
+//            navController.popBackStack(R.id.menuInicial, false)
         }
     }
 

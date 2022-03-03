@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_fragmentCadastro_to_dialog_cadastro"
             app:destination="@id/dialog_cadastro" />
+        <action
+            android:id="@+id/action_fragmentCadastro_to_menuInicial"
+            app:destination="@id/menuInicial" />
     </fragment>
     <fragment
         android:id="@+id/dialog_cadastro"
@@ -48,8 +51,7 @@
         <action
             android:id="@+id/action_dialog_cadastro_to_menuInicial"
             app:destination="@id/menuInicial"
-            app:popUpTo="@id/menuInicial"
-            app:popUpToInclusive="true" />
+             />
     </fragment>
     <fragment
         android:id="@+id/fragmentLista"
@@ -71,14 +73,12 @@
         <action
             android:id="@+id/action_dialog_visualização_to_fragmentAlterar"
             app:destination="@id/fragmentAlterar"
-
             app:popUpTo="@id/fragmentAlterar"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_dialog_visualização_to_menuInicial"
             app:destination="@id/menuInicial"
-            app:popUpTo="@id/menuInicial"
-            app:popUpToInclusive="true"/>
+            />
     </fragment>
     <fragment
         android:id="@+id/dialog_excluir"
