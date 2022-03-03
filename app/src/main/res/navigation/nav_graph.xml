@@ -13,17 +13,24 @@
         <action
             android:id="@+id/action_menuInicial_to_fragmentCadastro"
             app:destination="@id/fragmentCadastro"
-            app:launchSingleTop="false" />
-        <action
-            android:id="@+id/action_menuInicial_to_fragmentLista"
-            app:destination="@id/fragmentLista"
-            app:launchSingleTop="false" />
+            app:launchSingleTop="false"
+            />
         <action
             android:id="@+id/action_menuInicial_to_dialog_visualização"
-            app:destination="@id/dialog_visualização" />
+            app:destination="@id/dialog_visualização"
+            />
         <action
             android:id="@+id/action_menuInicial_to_fragmentAlterar"
             app:destination="@id/fragmentAlterar" />
+        <action
+            android:id="@+id/action_menuInicial_self2"
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/action_menuInicial_to_fragmentLista"
+            app:destination="@id/fragmentLista" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCadastro"
@@ -63,7 +70,10 @@
         tools:layout="@layout/dialog_exibir_dados" >
         <action
             android:id="@+id/action_dialog_visualização_to_fragmentAlterar"
-            app:destination="@id/fragmentAlterar" />
+            app:destination="@id/fragmentAlterar"
+
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_dialog_visualização_to_menuInicial"
             app:destination="@id/menuInicial"

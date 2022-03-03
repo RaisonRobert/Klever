@@ -71,10 +71,12 @@ class FragmentMenu : Fragment() {
             }else {
                 Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
                 findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+//                val navController = findNavController()
+//                navController.popBackStack(R.id.menuInicial, false)
             }
-//            findNavController().navigate(R.id.action_menuInicial_self)
-//            val navController = findNavController()
-//            navController.popBackStack(R.id.menuInicial, false)
+
+
+          //  findNavController().navigate(R.id.menuInicial)
         }
     }
 

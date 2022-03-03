@@ -34,7 +34,9 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
             val navController = findNavController()
             navController.popBackStack(R.id.menuInicial, false)
+
         }
+
     }
 
     fun addAlterar(view: View) {
@@ -50,17 +52,21 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     }
 
     private fun abrirOk(view: View) {
+        var i = false
         Salvar.arquivosDados.forEach {
+            i = false
             if (Salvar.pesquisa == it.CPF) {
+                i = true
                 Log.i("pesquisa", "antes : ${it.NOME}")
                 it.NOME = view.findViewById<EditText>(R.id.editTextAlterarNome).text.toString()
                 it.EMAIL = view.findViewById<EditText>(R.id.editTextAlterarEmail).text.toString()
                 it.CPF = view.findViewById<EditText>(R.id.editTextAlterarCpf).text.toString()
                 it.TELEFONE = view.findViewById<EditText>(R.id.editTextAlterarPhone).text.toString()
                 it.DATA = view.findViewById<EditText>(R.id.editTextAlterarDate).text.toString()
-                Log.i("pesquisa", "Depois: ${it.NOME}")
+                Log.i("pesquisa", "valor de i: ${i}")
             }
         }
+        Log.i("pesquisa", "valor de i: ${i}")
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_cadastro, null)
