@@ -4,7 +4,7 @@ package io.klever.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import io.klever.R
 import io.klever.model.DadosBanco
@@ -15,7 +15,7 @@ class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
     private var listar: MutableList<DadosBanco> = mutableListOf()
     var itemListener: itemClickListener? = null
     interface itemClickListener {
-        fun itemClick(dado: DadosBanco, btnVisualizar : Button, btnExcluir: Button, position: Int)
+        fun itemClick(dado: DadosBanco, btnVisualizar: ImageButton, btnExcluir: ImageButton, position: Int)
 
     }
 

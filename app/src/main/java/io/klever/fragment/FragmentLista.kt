@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -38,10 +38,10 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         loading = Load.createLoadDialog(this.requireContext(), false)
         adapterLista = RecyclerViewListaAdapter(this)
         setupRecyclerView(view)
-        addDados(view)
+        addDados()
     }
 
-    private fun addDados(view: View) {
+    private fun addDados() {
         loading.show()
         adapterLista.popularLista(Salvar.arquivosDados)
         loading.dismiss()
@@ -53,23 +53,25 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         recycler_lista.adapter = adapterLista
         adapterLista.apply {
             itemListener = object : RecyclerViewListaAdapter.itemClickListener {
-                override fun itemClick(dado: DadosBanco,btnVisualizar: Button, btnExcluir: Button, position: Int) {
+                override fun itemClick(
+                    dado: DadosBanco,
+                    btnVisualizar: ImageButton, btnExcluir: ImageButton, position: Int) {
                     btnVisualizar.setOnClickListener {
                         Log.i("lista", "botao Visualizar >> posição: $position")
-                        exibir(view, dado)
+                        exibir(dado)
                     }
                     btnExcluir.setOnClickListener {
                         abrirExcluir(dado)
-                        Log.i("lista", "botao Excluir >> posição: $position")
-                        Log.i("lista", "botao Excluir >> posição: $dado")
-                        Log.i("lista", "botao Excluir >> posição: ${Salvar.arquivosDados}")
-                        if (Salvar.arquivosDados.isEmpty() == false) {
+                        if (Salvar.arquivosDados.isNotEmpty()) {
+//                            findNavController().navigate(R.id.action_fragmentLista_self)
+                            findNavController().popBackStack()
                             findNavController().navigate(R.id.fragmentLista)
                         }
                         else{
-                            val navController = findNavController()
+                            findNavController().navigate((R.id.action_fragmentLista_to_menuInicial))
+//                            val navController = findNavController()
                             Toast.makeText(requireContext(),"Lista Vazia Cadastre Primeiro",Toast.LENGTH_SHORT).show()
-                            navController.popBackStack(R.id.menuInicial, false)
+//                            navController.popBackStack()
                         }
 
                     }
@@ -78,7 +80,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         }
 
     }
-    private fun exibir(view: View, dado: DadosBanco) {
+    private fun exibir(dado: DadosBanco) {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
@@ -103,7 +105,9 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         val view = inflater.inflate(R.layout.dialog_excluir, null)
         alertDialogPerguntas.setView(view).show()
     }
-    override fun itemClick(dado: DadosBanco, btnVisualizar: Button, btnExcluir: Button,position: Int) {
+    override fun itemClick(
+        dado: DadosBanco, btnVisualizar: ImageButton, btnExcluir: ImageButton,
+        position: Int) {
         TODO("Not yet implemented")
     }
 

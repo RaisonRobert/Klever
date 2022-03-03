@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -75,8 +75,8 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
 
     override fun itemClick(
         dado: DadosBanco,
-        btnVisualizar: Button,
-        btnExcluir: Button,
+        btnVisualizar: ImageButton,
+        btnExcluir: ImageButton,
         position: Int,
     ) {
         TODO("Not yet implemented")

@@ -64,6 +64,12 @@
         <action
             android:id="@+id/action_fragmentLista_to_dialog_excluir"
             app:destination="@id/dialog_excluir" />
+        <action
+            android:id="@+id/action_fragmentLista_self"
+            app:destination="@id/fragmentLista" />
+        <action
+            android:id="@+id/action_fragmentLista_to_menuInicial"
+            app:destination="@id/menuInicial" />
     </fragment>
     <fragment
         android:id="@+id/dialog_visualização"
