@@ -30,8 +30,8 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialogPesquisa()
-        val navController = findNavController()
-        navController.popBackStack(R.id.menuInicial, false)
+//        val navController = findNavController()
+//        navController.popBackStack(R.id.menuInicial, false)
     }
 
     private fun dialogPesquisa() {
@@ -57,6 +57,8 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         loading.dismiss()
         if (i == false) {
             Toast.makeText(requireContext(), "Pesquisa Não Encontrada", Toast.LENGTH_SHORT).show()
+            val navController = findNavController()
+            navController.popBackStack(R.id.menuInicial, false)
         } else {
             dialog.show()
             view.btnAlterar.setOnClickListener {

@@ -72,7 +72,7 @@
             android:id="@+id/action_dialog_visualização_to_fragmentAlterar"
             app:destination="@id/fragmentAlterar"
 
-            app:popUpTo="@id/menuInicial"
+            app:popUpTo="@id/fragmentAlterar"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_dialog_visualização_to_menuInicial"
