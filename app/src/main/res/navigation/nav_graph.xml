@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_menuInicial_to_dialog_visualização"
             app:destination="@id/dialog_visualização" />
+        <action
+            android:id="@+id/action_menuInicial_to_fragmentAlterar"
+            app:destination="@id/fragmentAlterar" />
     </fragment>
     <fragment
         android:id="@+id/fragmentCadastro"
@@ -61,6 +64,11 @@
         <action
             android:id="@+id/action_dialog_visualização_to_fragmentAlterar"
             app:destination="@id/fragmentAlterar" />
+        <action
+            android:id="@+id/action_dialog_visualização_to_menuInicial"
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/dialog_excluir"
@@ -79,7 +87,12 @@
         android:name="io.klever.fragment.FragmentAlterar"
         android:label="FragmentAlterar" >
         <action
+            android:id="@+id/action_fragmentAlterar_to_dialog_cadastro"
+            app:destination="@id/dialog_cadastro" />
+        <action
             android:id="@+id/action_fragmentAlterar_to_menuInicial"
-            app:destination="@id/menuInicial" />
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

@@ -36,9 +36,9 @@ class FragmentMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
-        Salvar.arquivosDados.add(Salvar.dados1)
-        Salvar.arquivosDados.add(Salvar.dados2)
-        Salvar.arquivosDados.add(Salvar.dados3)
+//        Salvar.arquivosDados.add(Salvar.dados1)
+//        Salvar.arquivosDados.add(Salvar.dados2)
+//        Salvar.arquivosDados.add(Salvar.dados3)
 //        view.findViewById<EditText>(R.id.editTextPesquisar).setText("Raison")
 //        Alterar
         cadastrar.setOnClickListener {
@@ -55,21 +55,26 @@ class FragmentMenu : Fragment() {
             } else {
                 findNavController().navigate(R.id.action_menuInicial_to_fragmentLista)
                 Log.i("botao", "clicar")
-
-
             }
         }
         pesquisar.setOnClickListener {
+            var pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
             Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
-            if(Salvar.pesquisa == ""){
+
+            Log.i("botao", "Pesquisa: $pesquisa")
+            if(true == pesquisa){
                 Toast.makeText(
                     requireContext(),
                     "Campo Vazio",
                     Toast.LENGTH_SHORT
                 ).show()
-            }else findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
-           // dialogPesquisa(view)
-            Log.i("botao", "Pesquisa")
+            }else {
+                Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
+                findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+            }
+//            findNavController().navigate(R.id.action_menuInicial_self)
+//            val navController = findNavController()
+//            navController.popBackStack(R.id.menuInicial, false)
         }
     }
 

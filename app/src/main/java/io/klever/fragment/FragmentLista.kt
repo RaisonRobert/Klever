@@ -62,7 +62,6 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                     btnVisualizar.setOnClickListener {
                         Log.i("lista", "botao Visualizar >> posição: $position")
                         exibir(view, dado)
-//                        viewTest.editTextTextPersonName.text = dado.NOME
                     }
                     btnExcluir.setOnClickListener {
                         abrirExcluir(view, dado, position)

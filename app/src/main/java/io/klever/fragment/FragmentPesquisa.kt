@@ -1,12 +1,10 @@
 package io.klever.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -18,32 +16,33 @@ import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
 
-class FragmentPesquisa: Fragment(), RecyclerViewListaAdapter.itemClickListener{
+class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     lateinit var loading: androidx.appcompat.app.AlertDialog
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         loading = Load.createLoadDialog(this.requireContext(), false)
         val view = inflater.inflate(R.layout.layout_fragment_menu, container, false)
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialogPesquisa(view)
+        dialogPesquisa()
     }
-    private fun dialogPesquisa(view: View){
+
+    private fun dialogPesquisa() {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.dialog_exibir_dados, null)
+        alertDialogExibir.setView(view)
+        val dialog = alertDialogExibir.create()
         var i = false
-        loading.show()
-        Salvar.arquivosDados.forEach{
-            if(Salvar.pesquisa == it.CPF){
-                Toast.makeText(requireContext(),"Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
+         loading.show()
+        Salvar.arquivosDados.forEach {
+            if (Salvar.pesquisa == it.CPF) {
+                Toast.makeText(requireContext(), "Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
                 i = true
                 view.visualizacao_nome.text = it.NOME
                 view.visualizacao_cpf.text = it.CPF
@@ -53,12 +52,15 @@ class FragmentPesquisa: Fragment(), RecyclerViewListaAdapter.itemClickListener{
             }
         }
         loading.dismiss()
-        if(i == false){
-            Toast.makeText(requireContext(),"Pesquisa Não Encontrada", Toast.LENGTH_SHORT).show()
-        }else{
-            alertDialogExibir.setView(view).show()
+        if (i == false) {
+            Toast.makeText(requireContext(), "Pesquisa Não Encontrada", Toast.LENGTH_SHORT).show()
+        } else {
+            dialog.show()
+            view.btnAlterar.setOnClickListener {
+                dialog.dismiss()
+                findNavController().navigate(R.id.fragmentAlterar)
+            }
         }
-            findNavController().popBackStack(R.id.menuInicial, false)
     }
 
     override fun itemClick(

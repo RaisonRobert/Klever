@@ -4,8 +4,7 @@ import io.klever.fragment.FragmentPesquisa
 import io.klever.model.DadosBanco
 
 object Salvar {
-    lateinit var pesquisa: String
-    var alterar: MutableList<DadosBanco> = mutableListOf()
+    var pesquisa: String? = null
     var arquivosDados: MutableList<DadosBanco> = mutableListOf()
     val dados1 =
         DadosBanco(
