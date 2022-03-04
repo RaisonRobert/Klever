@@ -1,6 +1,7 @@
 package io.klever.adapter
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +21,11 @@ class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("SetTextI18n")
         fun bindView(listAdapter: DadosBanco, action: RecyclerViewListaAdapter.itemClickListener) {
             itemView.textViewNome.text = listAdapter.NOME.toString()
-            itemView.textViewCpf.text = listAdapter.CPF.toString()
-            itemView.textViewData.text = listAdapter.DATA.toString()
+            itemView.textViewCpf.text ="CPF: " + listAdapter.CPF.toString()
+            itemView.textViewData.text ="Data: " + listAdapter.DATA.toString()
         }
     }
 

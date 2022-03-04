@@ -1,5 +1,6 @@
 package io.klever.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         dialogPesquisa()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun dialogPesquisa() {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
@@ -45,8 +47,8 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
                 Toast.makeText(requireContext(), "Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
                 i = true
                 view.visualizacao_nome_pesquisa.text = it.NOME
-                view.visualizacao_cpf_pesquisa.text = it.CPF
-                view.visualizacao_data_pesquisa.text = it.DATA
+                view.visualizacao_cpf_pesquisa.text = "CPF: " + it.CPF
+                view.visualizacao_data_pesquisa.text ="Data: " + it.DATA
                 view.visualizacao_email_pesquisa.text = it.EMAIL
                 view.visualizacao_telefone_pesquisa.text = it.TELEFONE
             }

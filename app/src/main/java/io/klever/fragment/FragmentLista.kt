@@ -1,5 +1,6 @@
 package io.klever.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -68,17 +69,15 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                         }
                         else{
                             findNavController().navigate((R.id.action_fragmentLista_to_menuInicial))
-//                            val navController = findNavController()
                             Toast.makeText(requireContext(),"Lista Vazia Cadastre Primeiro",Toast.LENGTH_SHORT).show()
-//                            navController.popBackStack()
                         }
-
                     }
                 }
             }
         }
 
     }
+    @SuppressLint("SetTextI18n")
     private fun exibir(dado: DadosBanco) {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
@@ -87,8 +86,8 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         val dialog = alertDialogExibir.create()
         dialog.show()
         view.visualizacao_nome.text = dado.NOME
-        view.visualizacao_cpf.text = dado.CPF
-        view.visualizacao_data.text = dado.DATA
+        view.visualizacao_cpf.text ="CPF: " + dado.CPF
+        view.visualizacao_data.text ="Data: " + dado.DATA
         view.visualizacao_email.text = dado.EMAIL
         view.visualizacao_telefone.text = dado.TELEFONE
         view.btnAlterar.setOnClickListener{

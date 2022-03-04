@@ -1,5 +1,6 @@
 package io.klever.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -16,6 +17,7 @@ import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.layout_fragment_cadastro.*
+import java.text.SimpleDateFormat
 
 class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     lateinit var adapterCadastro: RecyclerViewListaAdapter
@@ -45,9 +47,13 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     }
 
     private fun validaCPF(view: View): Boolean {
-        val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
-        if (cpf.length < 11) {
+        if (view.findViewById<EditText>(R.id.editTextCpf).text.length < 11) {
             editTextCpf.error = "Digite os 11 digitos de seu CPF"
+            editTextCpf.requestFocus()
+            return false
+        }
+        if (view.findViewById<EditText>(R.id.editTextDate).text.length < 8) {
+            editTextCpf.error = "dd/MM/yyyy"
             editTextCpf.requestFocus()
             return false
         }
@@ -73,12 +79,15 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         return true
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun cadastro(view: View) {
         val nome: String = view.findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
         val email: String = view.findViewById<EditText>(R.id.editTextTextEmail).text.toString()
         val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
         val telefone: String = view.findViewById<EditText>(R.id.editTextPhone).text.toString()
         val data: String = view.findViewById<EditText>(R.id.editTextDate).text.toString()
+        SimpleDateFormat(data)
+        Log.i("dada cadastro","data: $data")
         val dadoCadastro = (
                 DadosBanco(
                     NOME = nome,
