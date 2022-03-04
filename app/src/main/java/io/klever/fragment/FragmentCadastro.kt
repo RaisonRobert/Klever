@@ -1,6 +1,7 @@
 package io.klever.fragment
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     private val titulo = "Cadastro"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.layout_fragment_cadastro, container, false)
     }
@@ -31,12 +32,47 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         activity?.title = titulo
         adapterCadastro = RecyclerViewListaAdapter(this)
         enviarCadastro.setOnClickListener {
-            cadastro(view)
-            abrirOk()
-            findNavController().navigate(R.id.action_fragmentCadastro_to_menuInicial)
-            val navController = findNavController()
-            navController.popBackStack(R.id.menuInicial, false)
+
+
+            if (validadaDados(view)) {
+                editTextCpf.error = "Digite os 11 digitos de seu CPF"
+                editTextCpf.requestFocus()
+                if (validaCPF(view)) {
+                    cadastro(view)
+                    abrirOk()
+                    findNavController().navigate(R.id.action_fragmentCadastro_to_menuInicial)
+                    val navController = findNavController()
+                    navController.popBackStack(R.id.menuInicial, false)
+                }
+            }
         }
+    }
+
+    private fun validaCPF(view: View): Boolean {
+        val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
+        if (cpf.length < 11) {
+            return false
+        }
+        return true
+    }
+
+    private fun validadaDados(view: View): Boolean {
+        if (TextUtils.isEmpty(editTextTextPersonName.text)) {
+            editTextTextPersonName.error = "Nome Obrigatório"
+            editTextTextPersonName.requestFocus()
+            return false
+        }
+        if (TextUtils.isEmpty(editTextCpf.text)) {
+            editTextCpf.error = "CPF Obrigatório"
+            editTextCpf.requestFocus()
+             return false
+        }
+        if (TextUtils.isEmpty(editTextDate.text)) {
+            editTextDate.error = "Data Obrigatório"
+            editTextDate.requestFocus()
+            return false
+        }
+        return true
     }
 
     private fun cadastro(view: View) {
@@ -65,7 +101,12 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         alertDialogExibir.setView(view).show()
     }
 
-    override fun itemClick(dado: DadosBanco, btnVisualizar: ImageButton, btnExcluir: ImageButton, position: Int) {
+    override fun itemClick(
+        dado: DadosBanco,
+        btnVisualizar: ImageButton,
+        btnExcluir: ImageButton,
+        position: Int,
+    ) {
         TODO("Not yet implemented")
     }
 }
