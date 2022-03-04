@@ -71,7 +71,9 @@
             app:destination="@id/fragmentLista" />
         <action
             android:id="@+id/action_fragmentLista_to_menuInicial"
-            app:destination="@id/menuInicial" />
+            app:destination="@id/menuInicial"
+            app:popUpTo="@id/menuInicial"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_fragmentLista_to_fragmentAlterar"
             app:destination="@id/fragmentAlterar" />

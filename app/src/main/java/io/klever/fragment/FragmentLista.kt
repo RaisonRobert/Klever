@@ -68,7 +68,10 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                             findNavController().navigate(R.id.fragmentLista)
                         }
                         else{
+
                             findNavController().navigate((R.id.action_fragmentLista_to_menuInicial))
+                            val navController = findNavController()
+                            navController.popBackStack(R.id.menuInicial, false)
                             Toast.makeText(requireContext(),"Lista Vazia Cadastre Primeiro",Toast.LENGTH_SHORT).show()
                         }
                     }
