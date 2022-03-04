@@ -2,6 +2,7 @@ package io.klever.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,10 @@ import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.layout_fragment_alterar.*
+import kotlinx.android.synthetic.main.layout_fragment_cadastro.*
 
 class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
+    private val titulo = "Alterar os Dados"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -28,8 +31,8 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = titulo
         addAlterar(view)
-        //alterar ok
         btnSalvarAlteracao.setOnClickListener {
             abrirOk(view)
             findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
@@ -49,15 +52,11 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             }
         }
     }
-
     @Suppress("NAME_SHADOWING")
     @SuppressLint("SetTextI18n")
     private fun abrirOk(view: View) {
-//        var i = false
         Salvar.arquivosDados.forEach {
-//            i = false
             if (Salvar.pesquisa == it.CPF) {
-//                i = true
                 Log.i("pesquisa", "antes : ${it.NOME}")
                 it.NOME = view.findViewById<EditText>(R.id.editTextAlterarNome).text.toString()
                 it.EMAIL = view.findViewById<EditText>(R.id.editTextAlterarEmail).text.toString()

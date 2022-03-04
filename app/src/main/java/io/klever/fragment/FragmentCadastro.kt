@@ -32,11 +32,7 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         activity?.title = titulo
         adapterCadastro = RecyclerViewListaAdapter(this)
         enviarCadastro.setOnClickListener {
-
-
-            if (validadaDados(view)) {
-                editTextCpf.error = "Digite os 11 digitos de seu CPF"
-                editTextCpf.requestFocus()
+            if (validadaDados()) {
                 if (validaCPF(view)) {
                     cadastro(view)
                     abrirOk()
@@ -51,12 +47,14 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     private fun validaCPF(view: View): Boolean {
         val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
         if (cpf.length < 11) {
+            editTextCpf.error = "Digite os 11 digitos de seu CPF"
+            editTextCpf.requestFocus()
             return false
         }
         return true
     }
 
-    private fun validadaDados(view: View): Boolean {
+    private fun validadaDados(): Boolean {
         if (TextUtils.isEmpty(editTextTextPersonName.text)) {
             editTextTextPersonName.error = "Nome Obrigatório"
             editTextTextPersonName.requestFocus()
