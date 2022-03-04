@@ -33,15 +33,46 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
         addAlterar(view)
-        btnSalvarAlteracao.setOnClickListener {
-            abrirOk(view)
-            findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
-            val navController = findNavController()
-            navController.popBackStack(R.id.menuInicial, false)
-        }
-    }
 
-    fun addAlterar(view: View) {
+            btnSalvarAlteracao.setOnClickListener {
+                if (validadaDados()) {
+                    if (validaCPF(view)) {
+                        abrirOk(view)
+                        findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
+                        val navController = findNavController()
+                        navController.popBackStack(R.id.menuInicial, false)
+                    }
+                }
+            }
+    }
+    private fun validadaDados(): Boolean {
+        if (TextUtils.isEmpty(editTextAlterarNome.text)) {
+            editTextAlterarNome.error = "Nome Obrigatório"
+            editTextAlterarNome.requestFocus()
+            return false
+        }
+        if (TextUtils.isEmpty(editTextAlterarCpf.text)) {
+            editTextAlterarCpf.error = "CPF Obrigatório"
+            editTextAlterarCpf.requestFocus()
+            return false
+        }
+        if (TextUtils.isEmpty(editTextAlterarDate.text)) {
+            editTextAlterarDate.error = "Data Obrigatório"
+            editTextAlterarDate.requestFocus()
+            return false
+        }
+        return true
+    }
+    private fun validaCPF(view: View): Boolean {
+        val cpf: String = view.findViewById<EditText>(R.id.editTextAlterarCpf).text.toString()
+        if (cpf.length < 11) {
+            editTextAlterarCpf.error = "Digite os 11 digitos de seu CPF"
+            editTextAlterarCpf.requestFocus()
+            return false
+        }
+        return true
+    }
+    private  fun addAlterar(view: View) {
         Salvar.arquivosDados.forEach {
             if (Salvar.pesquisa == it.CPF) {
                 view.findViewById<EditText>(R.id.editTextAlterarNome).setText(it.NOME)
