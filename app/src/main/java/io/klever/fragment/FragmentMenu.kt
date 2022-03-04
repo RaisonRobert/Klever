@@ -16,14 +16,15 @@ import io.klever.R
 import io.klever.`object`.Load
 import io.klever.`object`.Salvar
 import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
+import kotlinx.android.synthetic.main.layout_fragment_alterar.*
 import kotlinx.android.synthetic.main.layout_fragment_menu.*
 
 class FragmentMenu : Fragment() {
-   private lateinit var loading: AlertDialog
+    private lateinit var loading: AlertDialog
     private val titulo = "Menu"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         loading = Load.createLoadDialog(requireContext(), false)
         val view = inflater.inflate(R.layout.layout_fragment_menu, container, false)
@@ -50,20 +51,41 @@ class FragmentMenu : Fragment() {
                 Log.i("botao", "clicar")
             }
         }
+
         pesquisar.setOnClickListener {
             val pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
             Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
             Log.i("botao", "Pesquisa: $pesquisa")
-            if(pesquisa){
-                Toast.makeText(
-                    requireContext(),
-                    "Campo Vazio",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }else {
-                Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
-                findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+            if (pesquisa) {
+                validadaDados()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Campo Vazio",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+            } else if (validaCPF(view)) {
+                    Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
+                    findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
             }
         }
+    }
+
+    private fun validadaDados(): Boolean {
+        if (TextUtils.isEmpty(editTextPesquisar.text)) {
+            editTextPesquisar.error = "Digite o CPF"
+            editTextPesquisar.requestFocus()
+            return false
+        }
+        return true
+    }
+
+    private fun validaCPF(view: View): Boolean {
+        val cpf: String = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
+        if (cpf.length < 11) {
+            editTextPesquisar.error = "Digite os 11 digitos de seu CPF"
+            editTextPesquisar.requestFocus()
+            return false
+        }
+        return true
     }
 }
