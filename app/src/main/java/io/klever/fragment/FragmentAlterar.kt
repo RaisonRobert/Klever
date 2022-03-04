@@ -18,7 +18,6 @@ import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.layout_fragment_alterar.*
-import kotlinx.android.synthetic.main.layout_fragment_cadastro.*
 
 class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     private val titulo = "Alterar os Dados"
@@ -33,18 +32,18 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = titulo
         addAlterar(view)
-
-            btnSalvarAlteracao.setOnClickListener {
-                if (validadaDados()) {
-                    if (validaCPF(view)) {
-                        abrirOk(view)
-                        findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
-                        val navController = findNavController()
-                        navController.popBackStack(R.id.menuInicial, false)
-                    }
+        btnSalvarAlteracao.setOnClickListener {
+            if (validadaDados()) {
+                if (validaCPF(view)) {
+                    abrirOk(view)
+                    findNavController().navigate(R.id.action_fragmentAlterar_to_menuInicial)
+                    val navController = findNavController()
+                    navController.popBackStack(R.id.menuInicial, false)
                 }
             }
+        }
     }
+
     private fun validadaDados(): Boolean {
         if (TextUtils.isEmpty(editTextAlterarNome.text)) {
             editTextAlterarNome.error = "Nome Obrigatório"
@@ -63,6 +62,7 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         }
         return true
     }
+
     private fun validaCPF(view: View): Boolean {
         val cpf: String = view.findViewById<EditText>(R.id.editTextAlterarCpf).text.toString()
         if (cpf.length < 11) {
@@ -70,9 +70,20 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             editTextAlterarCpf.requestFocus()
             return false
         }
+
+        Salvar.arquivosDados.forEach {
+            if (Salvar.pesquisa == cpf) {
+                return true
+            } else if (Salvar.verificaDadosNoBanco(cpf)) {
+                editTextAlterarCpf.error = "CPF já Cadastrado"
+                editTextAlterarCpf.requestFocus()
+                return false
+            }
+        }
         return true
     }
-    private  fun addAlterar(view: View) {
+
+    private fun addAlterar(view: View) {
         Salvar.arquivosDados.forEach {
             if (Salvar.pesquisa == it.CPF) {
                 view.findViewById<EditText>(R.id.editTextAlterarNome).setText(it.NOME)
@@ -83,6 +94,7 @@ class FragmentAlterar : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             }
         }
     }
+
     @Suppress("NAME_SHADOWING")
     @SuppressLint("SetTextI18n")
     private fun abrirOk(view: View) {

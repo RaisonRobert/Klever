@@ -25,9 +25,9 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
     private val titulo = "Lista de Todos Cadastrado"
     lateinit var recycler_lista: RecyclerView
     lateinit var adapterLista: RecyclerViewListaAdapter
-  override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.layout_fragment_lista, container, false)
         return view
@@ -56,7 +56,10 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
             itemListener = object : RecyclerViewListaAdapter.itemClickListener {
                 override fun itemClick(
                     dado: DadosBanco,
-                    btnVisualizar: ImageButton, btnExcluir: ImageButton, position: Int) {
+                    btnVisualizar: ImageButton,
+                    btnExcluir: ImageButton,
+                    position: Int,
+                ) {
                     btnVisualizar.setOnClickListener {
                         Log.i("lista", "botao Visualizar >> posição: $position")
                         exibir(dado)
@@ -66,20 +69,20 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
                         if (Salvar.arquivosDados.isNotEmpty()) {
                             findNavController().popBackStack()
                             findNavController().navigate(R.id.fragmentLista)
-                        }
-                        else{
-
+                        } else {
                             findNavController().navigate((R.id.action_fragmentLista_to_menuInicial))
                             val navController = findNavController()
                             navController.popBackStack(R.id.menuInicial, false)
-                            Toast.makeText(requireContext(),"Lista Vazia Cadastre Primeiro",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),
+                                "Lista Vazia Cadastre Primeiro",
+                                Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             }
         }
-
     }
+
     @SuppressLint("SetTextI18n")
     private fun exibir(dado: DadosBanco) {
         val alertDialogExibir = AlertDialog.Builder(requireContext())
@@ -89,16 +92,17 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         val dialog = alertDialogExibir.create()
         dialog.show()
         view.visualizacao_nome.text = dado.NOME
-        view.visualizacao_cpf.text ="CPF: " + dado.CPF
-        view.visualizacao_data.text ="Data: " + dado.DATA
-        view.visualizacao_email.text = dado.EMAIL
-        view.visualizacao_telefone.text = dado.TELEFONE
-        view.btnAlterar.setOnClickListener{
+        view.visualizacao_cpf.text = "CPF: " + dado.CPF
+        view.visualizacao_data.text = "Data: " + dado.DATA
+        view.visualizacao_email.text = "Email: " + dado.EMAIL
+        view.visualizacao_telefone.text = "Telefone: " + dado.TELEFONE
+        view.btnAlterar.setOnClickListener {
             dialog.dismiss()
             Salvar.pesquisa = dado.CPF
             findNavController().navigate(R.id.action_fragmentLista_to_fragmentAlterar)
         }
     }
+
     private fun abrirExcluir(dado: DadosBanco) {
         Salvar.arquivosDados.remove(dado)
         val alertDialogPerguntas = AlertDialog.Builder(requireContext())
@@ -106,9 +110,11 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         val view = inflater.inflate(R.layout.dialog_excluir, null)
         alertDialogPerguntas.setView(view).show()
     }
+
     override fun itemClick(
         dado: DadosBanco, btnVisualizar: ImageButton, btnExcluir: ImageButton,
-        position: Int) {
+        position: Int,
+    ) {
         TODO("Not yet implemented")
     }
 

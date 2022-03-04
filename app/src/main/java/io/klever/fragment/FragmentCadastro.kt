@@ -47,6 +47,7 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
     }
 
     private fun validaCPF(view: View): Boolean {
+        val cpf: String = view.findViewById<EditText>(R.id.editTextCpf).text.toString()
         if (view.findViewById<EditText>(R.id.editTextCpf).text.length < 11) {
             editTextCpf.error = "Digite os 11 digitos de seu CPF"
             editTextCpf.requestFocus()
@@ -56,6 +57,15 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
             editTextCpf.error = "dd/MM/yyyy"
             editTextCpf.requestFocus()
             return false
+        }
+        Salvar.arquivosDados.forEach {
+            if (Salvar.pesquisa == cpf) {
+                return true
+            } else if (Salvar.verificaDadosNoBanco(cpf)) {
+                editTextCpf.error = "CPF já Cadastrado"
+                editTextCpf.requestFocus()
+                return false
+            }
         }
         return true
     }
@@ -69,13 +79,14 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         if (TextUtils.isEmpty(editTextCpf.text)) {
             editTextCpf.error = "CPF Obrigatório"
             editTextCpf.requestFocus()
-             return false
+            return false
         }
         if (TextUtils.isEmpty(editTextDate.text)) {
             editTextDate.error = "Data Obrigatório"
             editTextDate.requestFocus()
             return false
         }
+
         return true
     }
 
@@ -87,7 +98,7 @@ class FragmentCadastro : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         val telefone: String = view.findViewById<EditText>(R.id.editTextPhone).text.toString()
         val data: String = view.findViewById<EditText>(R.id.editTextDate).text.toString()
         SimpleDateFormat(data)
-        Log.i("dada cadastro","data: $data")
+        Log.i("dada cadastro", "data: $data")
         val dadoCadastro = (
                 DadosBanco(
                     NOME = nome,

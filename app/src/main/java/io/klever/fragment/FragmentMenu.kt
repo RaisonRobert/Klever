@@ -15,8 +15,6 @@ import androidx.navigation.fragment.findNavController
 import io.klever.R
 import io.klever.`object`.Load
 import io.klever.`object`.Salvar
-import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
-import kotlinx.android.synthetic.main.layout_fragment_alterar.*
 import kotlinx.android.synthetic.main.layout_fragment_menu.*
 
 class FragmentMenu : Fragment() {
@@ -53,7 +51,8 @@ class FragmentMenu : Fragment() {
         }
 
         pesquisar.setOnClickListener {
-            val pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
+            val pesquisa =
+                view.findViewById<EditText>(R.id.editTextPesquisar).text.toString().isEmpty()
             Salvar.pesquisa = view.findViewById<EditText>(R.id.editTextPesquisar).text.toString()
             Log.i("botao", "Pesquisa: $pesquisa")
             if (pesquisa) {
@@ -64,8 +63,8 @@ class FragmentMenu : Fragment() {
 //                    Toast.LENGTH_SHORT
 //                ).show()
             } else if (validaCPF(view)) {
-                    Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
-                    findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
+                Log.i("botao", "Pesquisa Dados:  ${Salvar.pesquisa}")
+                findNavController().navigate(R.id.action_menuInicial_to_dialog_visualização)
             }
         }
     }

@@ -11,8 +11,7 @@ import io.klever.R
 import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.item_fragment_list.view.*
 
-class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
-    RecyclerView.Adapter<RecyclerViewListaAdapter.ViewHolder>() {
+class RecyclerViewListaAdapter(var clickListener: itemClickListener) : RecyclerView.Adapter<RecyclerViewListaAdapter.ViewHolder>() {
     private var listar: MutableList<DadosBanco> = mutableListOf()
     var itemListener: itemClickListener? = null
     interface itemClickListener {
@@ -47,6 +46,7 @@ class RecyclerViewListaAdapter(var clickListener: itemClickListener) :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public fun popularLista(dado: MutableList<DadosBanco>) {
         this.listar.clear()
         this.listar.addAll(dado)

@@ -15,7 +15,6 @@ import io.klever.`object`.Load
 import io.klever.`object`.Salvar
 import io.klever.adapter.RecyclerViewListaAdapter
 import io.klever.model.DadosBanco
-import kotlinx.android.synthetic.main.dialog_exibir_dados.view.*
 import kotlinx.android.synthetic.main.dialog_exibir_pesquisa.view.*
 
 class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener {
@@ -41,16 +40,16 @@ class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener 
         alertDialogExibir.setView(view)
         val dialog = alertDialogExibir.create()
         var i = false
-         loading.show()
+        loading.show()
         Salvar.arquivosDados.forEach {
             if (Salvar.pesquisa == it.CPF) {
                 Toast.makeText(requireContext(), "Pesquisa Encontrada", Toast.LENGTH_SHORT).show()
                 i = true
                 view.visualizacao_nome_pesquisa.text = it.NOME
                 view.visualizacao_cpf_pesquisa.text = "CPF: " + it.CPF
-                view.visualizacao_data_pesquisa.text ="Data: " + it.DATA
-                view.visualizacao_email_pesquisa.text = it.EMAIL
-                view.visualizacao_telefone_pesquisa.text = it.TELEFONE
+                view.visualizacao_data_pesquisa.text = "Data: " + it.DATA
+                view.visualizacao_email_pesquisa.text = "Email: " + it.EMAIL
+                view.visualizacao_telefone_pesquisa.text = "Telefone: " + it.TELEFONE
             }
         }
         loading.dismiss()
