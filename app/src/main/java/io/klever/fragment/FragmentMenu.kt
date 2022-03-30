@@ -25,8 +25,7 @@ class FragmentMenu : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         loading = Load.createLoadDialog(requireContext(), false)
-        val view = inflater.inflate(R.layout.layout_fragment_menu, container, false)
-        return view
+        return  inflater.inflate(R.layout.layout_fragment_menu, container, false)
     }
 
     @SuppressLint("CutPasteId")

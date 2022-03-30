@@ -29,8 +29,7 @@ class FragmentLista : Fragment(), RecyclerViewListaAdapter.itemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.layout_fragment_lista, container, false)
-        return view
+       return inflater.inflate(R.layout.layout_fragment_lista, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
