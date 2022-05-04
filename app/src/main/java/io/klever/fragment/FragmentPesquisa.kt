@@ -9,7 +9,9 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
+
 import io.klever.R
 import io.klever.`object`.Load
 import io.klever.`object`.Salvar
@@ -18,7 +20,7 @@ import io.klever.model.DadosBanco
 import kotlinx.android.synthetic.main.dialog_exibir_pesquisa.view.*
 
 class FragmentPesquisa : Fragment(), RecyclerViewListaAdapter.itemClickListener {
-    lateinit var loading: androidx.appcompat.app.AlertDialog
+    lateinit var loading: AlertDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

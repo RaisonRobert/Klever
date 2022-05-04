@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+
 import io.klever.R
 import io.klever.`object`.Load
 import io.klever.`object`.Salvar
@@ -25,7 +26,7 @@ class FragmentMenu : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         loading = Load.createLoadDialog(requireContext(), false)
-        return  inflater.inflate(R.layout.layout_fragment_menu, container, false)
+        return inflater.inflate(R.layout.layout_fragment_menu, container, false)
     }
 
     @SuppressLint("CutPasteId")
